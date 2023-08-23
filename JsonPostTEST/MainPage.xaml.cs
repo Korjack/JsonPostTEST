@@ -2,6 +2,7 @@
 using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading;
+using Microsoft.Maui.Controls.Shapes;
 
 namespace JsonPostTEST;
 
@@ -51,6 +52,9 @@ public partial class MainPage : ContentPage
 
             IntervalTime = int.Parse(InputIntervalTime.Text);
             _requests = new Requests(URL);
+
+            readUIJson();
+                
             sendWorker = new Thread(new ThreadStart(sendPostData));
             // sendWorker.Start();
         }
@@ -99,7 +103,36 @@ public partial class MainPage : ContentPage
         
         verticalStackLayout.Add(grid);
         verticalStackLayout.Add(button);
+
+        Border border = new Border();
+        border.Padding = 5;
+        border.Stroke = Brush.Black;
+        border.StrokeThickness = 2;
+        border.StrokeShape = new RoundRectangle{
+            CornerRadius = new CornerRadius(15, 15, 15, 15)
+        };
+
+        border.Content = verticalStackLayout;
         
-        parent.Add(verticalStackLayout);
+        parent.Add(border);
+    }
+
+    private void readUIJson()
+    {
+        Dictionary<string, string> json_dic = new Dictionary<string, string>();
+        var borders = JsonDATA.Children;
+
+        foreach (var border in borders)
+        {
+            if (border is not Button)
+            {
+                VerticalStackLayout verticalStackLayout = (border as Border).Content as VerticalStackLayout;
+                Entry Left = (verticalStackLayout.Children[0] as Grid)[0] as Entry;
+                Entry Right = (verticalStackLayout.Children[0] as Grid)[1] as Entry;
+                
+                Console.WriteLine(Left.Text, Right.Text);
+                // 1차적인 내부 읽어오는 것 되었음. 재귀함수로 내부에 있는 모든 Border를 읽어오는 것 구현필요
+            }
+        }
     }
 }
