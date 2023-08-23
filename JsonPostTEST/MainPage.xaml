@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:customview="clr-namespace:JsonPostTEST.CustomView"
+             x:Class="JsonPostTEST.MainPage">
+
+    <Grid Padding="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.3*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+                <ColumnDefinition Width="0.5*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <HorizontalStackLayout Grid.Column="0" Spacing="5" Padding="3, 10" HeightRequest="80">
+                <Label HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="18">URL 주소 : </Label>
+                <Entry x:Name="InputURL" Placeholder="주소를 입력해주세요." Text="http://127.0.0.1:8000/receive" TextChanged="InputView_OnTextChanged"/>
+            </HorizontalStackLayout>
+            <HorizontalStackLayout Grid.Column="1" Spacing="10">
+                <HorizontalStackLayout Spacing="3" Padding="3, 10" HeightRequest="80">
+                    <Label VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="15">무한 반복</Label>
+                    <CheckBox x:Name="IsLoop"></CheckBox>
+                </HorizontalStackLayout>
+                <HorizontalStackLayout Spacing="3" Padding="3, 10" HeightRequest="80">
+                    <Label VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="15">무한 반복</Label>
+                    <Entry x:Name="InputIntervalTime" Placeholder="시간 주기 입력" Text="100"/>
+                </HorizontalStackLayout>
+            </HorizontalStackLayout>
+            <Button x:Name="Send_RUN" Grid.Column="2" HorizontalOptions="Center" VerticalOptions="Center" Padding="5" FontSize="18" Text="전송" Clicked="Button_OnClicked"/>
+        </Grid>
+        <VerticalStackLayout Grid.Row="1" x:Name="JsonDATA">
+            <Button Text="Json 데이터 추가" Clicked="AddJsonTemplates"></Button>
+        </VerticalStackLayout>
+    </Grid>
+
+</ContentPage>
