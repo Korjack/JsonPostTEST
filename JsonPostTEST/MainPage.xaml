@@ -6,7 +6,7 @@
 
     <Grid Padding="10">
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.3*"></RowDefinition>
+            <RowDefinition Height="0.1*"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
@@ -31,9 +31,9 @@
             </HorizontalStackLayout>
             <Button x:Name="Send_RUN" Grid.Column="2" HorizontalOptions="Center" VerticalOptions="Center" Padding="5" FontSize="18" Text="전송" Clicked="Button_OnClicked"/>
         </Grid>
-        <VerticalStackLayout Grid.Row="1" x:Name="JsonDATA">
-            <Button Text="Json 데이터 추가" Clicked="AddJsonTemplates"/>
-        </VerticalStackLayout>
+        <ScrollView Grid.Row="1" Padding="10">
+            <customview:JsonView x:Name="JsonDataView"></customview:JsonView>
+        </ScrollView>
     </Grid>
 
 </ContentPage>

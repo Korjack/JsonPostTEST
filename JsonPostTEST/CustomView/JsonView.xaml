@@ -3,7 +3,8 @@
 <Frame xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="JsonPostTEST.CustomView.JsonView">
-        <Grid ColumnSpacing="10">
+    <VerticalStackLayout Spacing="20">
+        <Grid ColumnSpacing="10" Padding="10">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"></ColumnDefinition>
                 <ColumnDefinition Width="1*"></ColumnDefinition>
@@ -11,4 +12,10 @@
             <Entry Grid.Column="0"></Entry>
             <Entry Grid.Column="1"></Entry>
         </Grid>
+        <HorizontalStackLayout Spacing="10">
+            <Button Text="Json 추가" Clicked="AddJsonTempaltes"></Button>
+            <Button Text="Json 객체 추가" Clicked="AddJsonChildTemplates"></Button>
+            <Button Text="Json 삭제" Clicked="RemoveJsonTemplates"></Button>
+        </HorizontalStackLayout>
+    </VerticalStackLayout>
 </Frame>
