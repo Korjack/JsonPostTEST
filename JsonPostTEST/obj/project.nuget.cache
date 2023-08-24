@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "XNQPNNkDI8bxEWUHQTKjXFDZe9jDnaqgXQCWWdTyPdi3jFTcsEGFASdIWBZ2sJuHJYVmayVOJOCf1tfNR+8r4w==",
+  "dgSpecHash": "+mGJ2mJKYOGhqVT8eITqWNLvuEE2hyXM3jecbuthnN/bBxczHK1u4SgIlV0zNcN7NtjlAoAJqZZz74nLOvl90w==",
   "success": true,
   "projectFilePath": "/Users/gimduhyeon/Github/JsonPostTEST/JsonPostTEST/JsonPostTEST.csproj",
   "expectedPackageFiles": [
@@ -15,6 +15,7 @@
     "/Users/gimduhyeon/.nuget/packages/microsoft.extensions.options/7.0.0/microsoft.extensions.options.7.0.0.nupkg.sha512",
     "/Users/gimduhyeon/.nuget/packages/microsoft.extensions.primitives/7.0.0/microsoft.extensions.primitives.7.0.0.nupkg.sha512",
     "/Users/gimduhyeon/.nuget/packages/microsoft.maui.graphics/7.0.92/microsoft.maui.graphics.7.0.92.nupkg.sha512",
+    "/Users/gimduhyeon/.nuget/packages/newtonsoft.json/13.0.3/newtonsoft.json.13.0.3.nupkg.sha512",
     "/Users/gimduhyeon/.nuget/packages/xamarin.android.glide/4.13.2.2/xamarin.android.glide.4.13.2.2.nupkg.sha512",
     "/Users/gimduhyeon/.nuget/packages/xamarin.android.glide.annotations/4.13.2.2/xamarin.android.glide.annotations.4.13.2.2.nupkg.sha512",
     "/Users/gimduhyeon/.nuget/packages/xamarin.android.glide.disklrucache/4.13.2.2/xamarin.android.glide.disklrucache.4.13.2.2.nupkg.sha512",

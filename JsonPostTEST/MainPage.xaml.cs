@@ -1,5 +1,6 @@
 ﻿using System.Net;
 using JsonPostTEST.CustomView;
+using Newtonsoft.Json;
 
 namespace JsonPostTEST;
 
@@ -99,27 +100,8 @@ public partial class MainPage : ContentPage
         
         readJson(verticalStackLayout, JsonData);
 
-        Console.WriteLine(DicToString(JsonData));
-    }
-
-    private string DicToString(Dictionary<string, object> dic)
-    {
-        string reuslt = "";
-        foreach (var item in dic)
-        {
-            if (item.Value is Dictionary<string, object>)
-            {
-                reuslt += $"[\n{item.Key} : \n";
-                reuslt += DicToString(item.Value as Dictionary<string, object>);
-                reuslt += "\n]";
-            }
-            else
-            {
-                reuslt += $"[{item.Key} : {item.Value}]\n";
-                Console.WriteLine();
-            }
-        }
-
-        return reuslt;
+        string jsonString = JsonConvert.SerializeObject(JsonData);
+        Console.WriteLine(jsonString);
+        
     }
 }
