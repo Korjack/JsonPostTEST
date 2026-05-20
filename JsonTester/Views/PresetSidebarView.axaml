@@ -1,0 +1,113 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:JsonTester.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="224" d:DesignHeight="700"
+             x:Class="JsonTester.Views.PresetSidebarView"
+             x:DataType="vm:PresetSidebarViewModel"
+             MinWidth="224" MinHeight="500"
+             Background="#f9f9f9"
+             CornerRadius="8">
+    <Design.DataContext>
+        <vm:PresetSidebarViewModel/>
+    </Design.DataContext>
+    
+    <UserControl.Styles>
+        <Style Selector="Button">
+            <Setter Property="Background" Value="Transparent"/>
+        </Style>
+        
+        <Style Selector="RadioButton">
+            <Setter Property="Template">
+                <ControlTemplate>
+                    <Border Background="{TemplateBinding Background}"
+                            Padding="{TemplateBinding Padding}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="4">
+                        <ContentPresenter Content="{TemplateBinding Content}"
+                                          VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter>
+        </Style>
+
+        <!-- 선택된 상태 -->
+        <Style Selector="RadioButton:checked">
+            <Setter Property="BorderBrush" Value="#0067c0"/>
+            <Setter Property="BorderThickness" Value="4, 0, 0, 0"/>
+        </Style>
+        
+        <!-- 호버 상태 -->
+        <Style Selector="RadioButton:pointerover">
+            <Setter Property="Background" Value="#e0e0e0"/>
+        </Style>
+    </UserControl.Styles>
+    
+    <Grid RowDefinitions="Auto, Auto, *">
+        <Border Grid.Row="0"
+                Background="#fafafa"
+                BorderBrush="#1a1a1a"
+                BorderThickness="0, 0, 0,1"
+                CornerRadius="8, 8, 0, 0"
+                Height="38"
+                Padding="12, 0">
+            <DockPanel VerticalAlignment="Center">
+                <StackPanel DockPanel.Dock="Right"
+                            Orientation="Horizontal">
+                    <Button Width="26" Height="26">
+                        <Image Source="avares://JsonTester/Assets/Icons/floppy-disk-regular.png"
+                               MinWidth="12"
+                               MinHeight="12"/>
+                    </Button>
+                    <Button Width="26" Height="26">
+                        <Image Source="avares://JsonTester/Assets/Icons/plus-solid.png"
+                               MinWidth="12"
+                               MinHeight="12"/>
+                    </Button>
+                </StackPanel>
+                
+                <TextBlock DockPanel.Dock="Left"
+                           Text="프리셋"
+                           FontWeight="Bold"
+                           FontSize="13"/>
+            </DockPanel>
+        </Border>
+        <TextBlock Grid.Row="1"
+                   Height="33"
+                   Padding="12, 12 ,12, 6"
+                   Text="최근 사용"
+                   FontSize="11"/>
+        <ItemsControl Grid.Row="2"
+                      Padding="4, 0"
+                      ItemsSource="{Binding Presets}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <RadioButton HorizontalAlignment="Stretch"
+                                 CornerRadius="8"
+                                 Padding="4, 4"
+                                 GroupName="PresetGroup">
+                        <Grid RowDefinitions="Auto, Auto">
+                            <DockPanel Grid.Row="0">
+                                <Border DockPanel.Dock="Right" 
+                                        BorderBrush="#d1d1d1"
+                                        BorderThickness="1"
+                                        Padding="5, 1"
+                                        VerticalAlignment="Center">
+                                    <TextBlock Text="{Binding ConnectionType}"
+                                               FontSize="10"/>
+                                </Border>
+                                <TextBlock DockPanel.Dock="Left" 
+                                           Text="{Binding Name}"/>
+                            </DockPanel>
+                            <TextBlock Grid.Row="1"
+                                       Text="{Binding Addr}"
+                                       TextTrimming="CharacterEllipsis"/>
+                        </Grid>
+                    </RadioButton>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </Grid>
+</UserControl>

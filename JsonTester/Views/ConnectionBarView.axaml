@@ -1,0 +1,98 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="1280" d:DesignHeight="53"
+             x:Class="JsonTester.Views.ConnectionBarView">
+    <UserControl.Styles>
+        <Style Selector="RadioButton">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="#5d5d5d"/>
+            <Setter Property="Padding" Value="8,4"/>
+            <Setter Property="Template">
+                <ControlTemplate>
+                    <Border Background="{TemplateBinding Background}"
+                            Padding="{TemplateBinding Padding}"
+                            CornerRadius="4">
+                        <ContentPresenter Content="{TemplateBinding Content}"
+                                          HorizontalAlignment="Center"
+                                          VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter>
+        </Style>
+
+        <!-- 선택된 상태 -->
+        <Style Selector="RadioButton:checked">
+            <Setter Property="Background" Value="#0067c0"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+
+        <!-- 호버 상태 -->
+        <Style Selector="RadioButton:pointerover">
+            <Setter Property="Background" Value="#e0e0e0"/>
+        </Style>
+    </UserControl.Styles>
+    
+    <Grid ColumnSpacing="8" 
+        Margin="8">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        
+        <!-- 연결방법 선택 -->
+        <Border Grid.Column="0" BorderBrush="#d1d1d1"
+                BorderThickness="1"
+                CornerRadius="4"
+                VerticalAlignment="Center"
+                Padding="4">
+            <StackPanel Orientation="Horizontal" Spacing="4">
+                <RadioButton Content="Http" IsChecked="True" GroupName="ComMethod"/>
+                <RadioButton Content="Websocket" GroupName="ComMethod"/>
+            </StackPanel>
+        </Border>
+        <!-- 연결방법 선택 -->
+        
+        <TextBox Grid.Column="1" HorizontalAlignment="Stretch"
+                 BorderBrush="#d1d1d1">
+            <TextBox.InnerLeftContent>
+                <Border Background="#eaeaea"
+                        Padding="8, 8, 16, 8">
+                    <TextBlock Text="https://"
+                               FontSize="13"/>
+                </Border>
+            </TextBox.InnerLeftContent>
+            <TextBox.InnerRightContent>
+                <TextBox Text="9000" 
+                         BorderBrush="#d1d1d1"
+                         BorderThickness="1, 0, 0, 0"
+                         CornerRadius="0"
+                         VerticalAlignment="Center"
+                         HorizontalAlignment="Center"
+                         VerticalContentAlignment="Stretch"
+                         HorizontalContentAlignment="Stretch"/>
+            </TextBox.InnerRightContent>
+        </TextBox>
+        
+        <StackPanel Grid.Column="2"
+                    Orientation="Horizontal"
+                    Spacing="8">
+            <StackPanel Orientation="Horizontal"
+                        VerticalAlignment="Center"
+                        Spacing="8">
+                <Border Width="8" Height="8"
+                        Background="Chartreuse"
+                        CornerRadius="32"/>
+                <TextBlock Text="연결됨" />
+            </StackPanel>
+            <Button Content="전송"
+                    Width="140" Height="32"
+                    HorizontalContentAlignment="Center"
+                    CornerRadius="8"
+                    Background="#0067c0"
+                    Foreground="White"/>
+        </StackPanel>
+    </Grid>
+</UserControl>
