@@ -1,0 +1,186 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:JsonTester.ViewModels.JsonBuilder"
+             xmlns:jsonviews="clr-namespace:JsonTester.Views.JsonBuilder"
+             mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="232"
+             x:Class="JsonTester.Views.JsonBuilder.JsonNodeView"
+             x:DataType="vm:JsonNodeViewModel"
+             MinHeight="32" Padding="8, 0">
+    
+    <Design.DataContext>
+        <vm:JsonNodeViewModel/>
+    </Design.DataContext>
+    
+    <UserControl.Styles>
+        <Style Selector="Grid.json-node-grid">
+            <Setter Property="Background" Value="Transparent"/>
+            
+            <Style Selector="^ ToggleButton">
+                <Setter Property="Background" Value="Transparent"/>
+            </Style>
+        
+            <Style Selector="^ TextBox:pointerover">
+                <Setter Property="Background" Value="SlateGray"/>
+            </Style>
+        
+            <Style Selector="^ Button">
+                <Setter Property="IsVisible" Value="False"/>
+                <Setter Property="Width" Value="32"/>
+                <Setter Property="Height" Value="32"/>
+                <Setter Property="Background" Value="Transparent"/>
+            </Style>
+            
+            <Style Selector="^:pointerover">
+                <Setter Property="Background" Value="#F0F0F0"/>
+            </Style>
+            <Style Selector="^:pointerover Button">
+                <Setter Property="IsVisible" Value="True"/>
+            </Style>
+            <Style Selector="^:pointerover TextBox">
+                <Setter Property="Background" Value="#E9E9E9"/>
+            </Style>
+            
+            <!-- 선택된 상태 -->
+            <Style Selector="^ RadioButton:checked">
+                <Setter Property="Background" Value="#0067c0"/>
+                <Setter Property="Foreground" Value="White"/>
+            </Style>
+
+            <!-- 호버 상태 -->
+            <Style Selector="^ RadioButton:pointerover">
+                <Setter Property="Background" Value="#e0e0e0"/>
+            </Style>
+        </Style>
+    </UserControl.Styles>
+    
+    <StackPanel Spacing="4">
+        <Grid ColumnSpacing="8" ColumnDefinitions="Auto,1*,1*,0.6*"
+              Classes="json-node-grid">
+            
+            <ComboBox Grid.Column="0"
+                      Width="120"
+                      ItemsSource="{Binding Types}"
+                      SelectedItem="{Binding SelectedType}"
+                      VerticalAlignment="Center">
+                <ComboBox.SelectionBoxItemTemplate>
+                    <DataTemplate x:DataType="vm:JsonTypeItem">
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <Rectangle Width="9" Height="9"
+                                       Fill="{Binding Color}"
+                                       VerticalAlignment="Center"/>
+                            <TextBlock Text="{Binding TypeName}" FontWeight="Bold"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ComboBox.SelectionBoxItemTemplate>
+                
+                <ComboBox.ItemTemplate>
+                    <DataTemplate DataType="vm:JsonTypeItem">
+                        <DockPanel HorizontalSpacing="24">
+                            <TextBlock DockPanel.Dock="Right"
+                                       Text="{Binding Example}"
+                                       Foreground="#9a9a9a"
+                                       VerticalAlignment="Center"/>
+                            <StackPanel DockPanel.Dock="Left" Orientation="Horizontal" Spacing="8">
+                                <Rectangle Width="9" Height="9" Fill="{Binding Color}"/>
+                                <TextBlock Text="{Binding TypeName}" FontWeight="Bold"/>
+                            </StackPanel>
+                        </DockPanel>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            
+            <TextBox Grid.Column="1"
+                     Width="150"
+                     BorderThickness="0"
+                     Watermark="Key"
+                     VerticalContentAlignment="Center"/>
+            
+            <Grid Grid.Column="2">
+                <!-- 문자열 -->
+                <TextBox BorderThickness="0"
+                         Watermark="Value"
+                         VerticalContentAlignment="Center"
+                         IsVisible="{Binding IsStringType}"/>
+                <!-- 문자열 -->
+                
+                <!-- 숫자 -->
+                <NumericUpDown Value="0"
+                               Increment="0.1"
+                               FormatString="0.##"
+                               IsVisible="{Binding IsNumberType}"/>
+                <!-- 숫자 -->
+                
+                <!-- True / False -->
+                <StackPanel Orientation="Horizontal" Spacing="8"
+                            IsVisible="{Binding IsBoolType}">
+                    <RadioButton Theme="{StaticResource RadioButtonTheme}"
+                                 Content="True" IsChecked="True"
+                                 BorderBrush="#d1d1d1" BorderThickness="1"
+                                 CornerRadius="8"
+                                 GroupName="TrueFalseGroup"/>
+                    <RadioButton Theme="{StaticResource RadioButtonTheme}"
+                                 Content="False"
+                                 BorderBrush="#d1d1d1" BorderThickness="1"
+                                 CornerRadius="8"
+                                 GroupName="TrueFalseGroup"/>
+                </StackPanel>
+                <!-- True / False -->
+                
+                <!-- 객체 -->
+                <TextBlock Text="{Binding Children.Count, StringFormat='{}{0} 개 필드'}"
+                           Foreground="#9a9a9a"
+                           FontSize="12"
+                           VerticalAlignment="Center" HorizontalAlignment="Center"
+                           IsVisible="{Binding IsObjectType}"/>
+                <!-- 객체 -->
+                
+                <!-- 비어있음 -->
+                <TextBlock Text="null"
+                           Foreground="#9a9a9a"
+                           FontSize="12"
+                           VerticalAlignment="Center"
+                           IsVisible="{Binding IsNullType}"/>
+                <!-- 비어있음 -->
+                
+            </Grid>
+            
+            <StackPanel Grid.Column="3" Orientation="Horizontal">
+                <Button>
+                    <Image Source="avares://JsonTester/Assets/Icons/copy-regular.png"></Image>
+                </Button>
+                <Button>
+                    <Image Source="avares://JsonTester/Assets/Icons/plus-solid.png"></Image>
+                </Button>
+                <Button>
+                    <Image Source="avares://JsonTester/Assets/Icons/trash-solid.png"></Image>
+                </Button>
+            </StackPanel>
+        </Grid>
+        
+        <StackPanel Margin="16, 0, 0, 0"
+                    Spacing="4">
+            <!-- 자식들 (객체일 때만) -->
+            <ItemsControl ItemsSource="{Binding Children}"
+                          IsVisible="{Binding IsObjectType}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Spacing="2"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate x:DataType="vm:JsonNodeViewModel">
+                        <jsonviews:JsonNodeView/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        
+            <Button Content="+ 필드 추가" Command="{Binding AddChildrenNodeCommand}"
+                    Margin="8, 0, 0, 0"
+                    Background="#f0f0f0"
+                    BorderBrush="#5d5d5d"
+                    IsVisible="{Binding IsObjectType}"/>
+        </StackPanel>
+    </StackPanel>
+</UserControl>

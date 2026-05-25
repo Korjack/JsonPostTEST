@@ -3,7 +3,11 @@
         xmlns:vm="using:JsonTester.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:views="clr-namespace:JsonTester.Views"
+        xmlns:jsonBuilder="clr-namespace:JsonTester.Views.JsonBuilder"
+        xmlns:inpector="clr-namespace:JsonTester.Views.Inspector"
         mc:Ignorable="d" d:DesignWidth="1280" d:DesignHeight="800"
+        Width="1280" Height="800" CanResize="False"
         x:Class="JsonTester.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/avalonia-logo.ico"
@@ -15,6 +19,35 @@
         <vm:MainWindowViewModel/>
     </Design.DataContext>
 
-    <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-
+    <Grid RowDefinitions="Auto, *">
+        <views:ConnectionBarView Grid.Row="0"/>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" MinWidth="224"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*" MinWidth="560"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto" MinWidth="300"/>
+            </Grid.ColumnDefinitions>
+            
+            <views:PresetSidebarView Grid.Column="0"
+                                     DataContext="{Binding PresetSidebarViewModel}"/>
+            
+            <GridSplitter Grid.Column="1"
+                          Width="4"
+                          ResizeDirection="Columns"
+                          Cursor="SizeWestEast"/>
+            
+            <jsonBuilder:JsonBuilderView Grid.Column="2" 
+                                         DataContext="{Binding JsonBuilderViewModel}"/>
+            
+            <GridSplitter Grid.Column="3"
+                          Width="4"
+                          ResizeDirection="Columns"
+                          Cursor="SizeWestEast"/>
+            
+            <inpector:InspectorView Grid.Column="4"
+                                    DataContext="{Binding InspectorViewModel}"/>
+        </Grid>
+    </Grid>
 </Window>

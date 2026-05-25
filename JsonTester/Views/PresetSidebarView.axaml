@@ -8,7 +8,7 @@
              x:DataType="vm:PresetSidebarViewModel"
              MinWidth="224" MinHeight="500"
              Background="#f9f9f9"
-             CornerRadius="8">
+             CornerRadius="16">
     <Design.DataContext>
         <vm:PresetSidebarViewModel/>
     </Design.DataContext>

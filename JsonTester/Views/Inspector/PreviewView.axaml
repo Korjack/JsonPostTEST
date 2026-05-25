@@ -1,0 +1,36 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:JsonTester.ViewModels.Inspector"
+             mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="630"
+             x:Class="JsonTester.Views.Inspector.PreviewView"
+             x:DataType="vm:PreviewViewModel">
+    <Design.DataContext>
+        <vm:PreviewViewModel/>
+    </Design.DataContext>
+    
+    <Grid RowDefinitions="Auto, *">
+        <Border Grid.Row="0" Padding="12, 6"
+                BorderBrush="#5d5d5d"
+                BorderThickness="0, 0, 0, 1"
+                Height="37">
+            <DockPanel>
+                <Button DockPanel.Dock="Right"
+                        Content="복사"
+                        Background="Transparent"
+                        BorderBrush="#d1d1d1"
+                        FontSize="12"
+                        Padding="10, 3"/>
+                <TextBlock DockPanel.Dock="Left"
+                           Text="JSON 14B 9 lines"
+                           Foreground="#5d5d5d"
+                           VerticalAlignment="Center"/>
+            </DockPanel>
+        </Border>
+        
+        <TextBlock Grid.Row="1"
+                   Padding="8"
+                   Text="실제 JSON DATA"/>
+    </Grid>
+</UserControl>
